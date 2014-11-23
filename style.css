@@ -1,0 +1,19 @@
+#Home, #Group{
+  display:none;
+}
+
+#Group{
+  margin-top:50px;
+}
+
+ul{
+    list-style: none;
+}
+
+.checked{
+ text-decoration: line-through;
+}
+
+h1.groupName{
+  color:gray;
+}
