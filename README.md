@@ -14,4 +14,4 @@ This Project is just for learning purpose.
 - change name of the list
 - styling will come at the end
 
-! It's all front-end, the data won't be saved anywhere, Refresh means destroy All
+! It's all front-end, the data won't be saved anywhere, Refresh means destroy All.
