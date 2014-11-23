@@ -3,11 +3,14 @@ JStodo
 
 Todo List Javascript
 
-This Project is just for learning purpose.
+--Pure Javascript ToDo List--
 
-+  Add Your Name and group Name , Check and uncheck the lists, You can add a group of your list and add list for each group.
+You are able to:
+1)Add Your Name 
+2)Check/Uncheck the lists
+3)Add list for each group.
+4)Rename the list
 
+- Still very rough, on refactor ,Remove item isn't there yet , Styling will come at the end.
 
-- Still very rough, on refactor ,Remove item not there yet ,Change name of the list , Styling will come at the end
-
-! It's all front-end, the data won't be saved anywhere, Refresh means destroy All.
+!! It's all front-end, the data won't be saved anywhere, Refresh means destroy All.
