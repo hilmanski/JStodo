@@ -9,8 +9,29 @@ var letters = /^[A-Za-z]+$/;
 var x = 0, y = 0;
 var i;
 
+
+//function when enter key pressed
+function onEnter(e, item){
+
+  if (e.keyCode == 13 ){
+     switch(item){
+
+        case 'name':
+          submitName();
+          break;
+
+        case 'grName':
+          addGroup();
+          break;
+
+            default:
+     }
+  }
+}
+
 //-------- Hide indexPage and Display the TodoList -----------
-btnStart.onclick = function() {
+function submitName() {
+
   var textName = document.getElementById("nameText").value;
   var length = textName.length;
 
@@ -23,9 +44,8 @@ btnStart.onclick = function() {
   document.getElementById("userName").innerHTML = textName;
 }
 
-
 //--------display and add a new Group-------------------
-btnAddGroup.onclick = function() {
+function addGroup() {
   var group = document.getElementById("Group");
   var textGroup = document.getElementById("groupText").value;
   var length = textGroup.length;
@@ -43,6 +63,7 @@ btnAddGroup.onclick = function() {
    Called by btnAddGroup
    parameter :  1)Div id, 2)GroupName
 */
+
 function addNewGroup(group, groupText){
   x++;
   var id = "" + x;
@@ -76,13 +97,11 @@ function addNewGroup(group, groupText){
   group.appendChild(eachGroup);
 
   bufferItem();
-
 }
 
 //--- trigger to call the addNewItem function ------
 function bufferItem() {
-
-   var btnLists = document.getElementsByClassName("btnList");
+    var btnLists = document.getElementsByClassName("btnList");
 
     for(i = 0; i<btnLists.length; i++) {
 
@@ -90,6 +109,7 @@ function bufferItem() {
 
         btnList.onclick = function() {
           var id = this.id;
+
           var listText = document.getElementById("inputItem-" + id).value;
           addNewItem(document.getElementById("ulItem-" + id), listText);
         }
