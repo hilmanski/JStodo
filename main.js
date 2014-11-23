@@ -1,130 +1,121 @@
-//document   Index Page
-//------ Refactor write nice JS
-
-var btnName  = document.getElementById("btnName");
-
 /*
-check if the value at least 6 characters
-and only letters
+* Developed by : Hilman Ramadhan
+* idea based   : Easy learn tutorial
 */
-btnName.onclick = function() {
 
-  var textName = nameText.value;
+var btnStart = document.getElementById("btnStart");
+var btnAddGroup = document.getElementById("btnAddGroup");
+var letters = /^[A-Za-z]+$/;
+var x = 0, y = 0;
+var i;
+
+//-------- Hide indexPage and Display the TodoList -----------
+btnStart.onclick = function() {
+  var textName = document.getElementById("nameText").value;
   var length = textName.length;
-  var letters = /^[A-Za-z]+$/;
 
-  if (length<1 || !textName.match(letters) ) {
+  if ( length<5 || !textName.match(letters) ) {
     return false;
   }
 
   document.getElementById("index").style.display = "none";
   document.getElementById("Home").style.display = "block";
   document.getElementById("userName").innerHTML = textName;
-
 }
 
-//----------- End of Index Page  -----------
 
-//display and add a new Group
-var btnGroup = document.getElementById("btnAddGroup");
-btnGroup.onclick = function() {
-  var textGroup = groupText.value;
+//--------display and add a new Group-------------------
+btnAddGroup.onclick = function() {
+  var group = document.getElementById("Group");
+  var textGroup = document.getElementById("groupText").value;
   var length = textGroup.length;
-  var letters = /^[A-Za-z]+$/;
 
   if (!textGroup.match(letters) ) {
     return false;
   }
 
-  Group.style.display = "block";
-
-  addNewGroup(Group, textGroup);
+  group.style.display = "block";
+  addNewGroup(group, textGroup);
 }
 
-var x=0;
 
+/* Function add a group :
+   Called by btnAddGroup
+   parameter :  1)Div id, 2)GroupName
+*/
 function addNewGroup(group, groupText){
-
-  //var id just to pick a random but not repeated number. We could clearly (BETTER) use global variabel total item that increase each func called
   x++;
-  // convert id to string by adding ""
-  var id = " " + x;
+  var id = "" + x;
 
   var groupName = document.createElement("h1");
-  groupName.id = "h1_" + id;
+  groupName.id = "h1-" +id;
   groupName.innerHTML = groupText;
-  groupName.className = "groupName";
 
   var inputItem = document.createElement("input");
   inputItem.type = "text";
-  inputItem.id = "inputItem_" + id;
+  inputItem.id = "inputItem-" +id;
 
   var btnItem = document.createElement("BUTTON");
   var btnText = document.createTextNode("Add List");
-  btnItem.id = id;
-  btnItem.className = "btnList";
   btnItem.appendChild(btnText);
+  btnItem.className = "btnList";
+  btnItem.id = id;
 
   var ulItem = document.createElement("ul");
-  ulItem.id = "ulItem_" + id;
+  ulItem.id = "ulItem-" + id;
 
-  var newDiv = document.createElement("div");
-  newDiv.id = "newDiv_" + id;
+  var eachGroup = document.createElement("div");
+  eachGroup.className = "each-group";
+  eachGroup.id = "each-group-" + id;
 
+  eachGroup.appendChild(groupName);
+  eachGroup.appendChild(inputItem);
+  eachGroup.appendChild(btnItem);
+  eachGroup.appendChild(ulItem);
 
-  newDiv.appendChild(groupName);
-  newDiv.appendChild(inputItem);
-  newDiv.appendChild(btnItem);
-  newDiv.appendChild(ulItem);
+  group.appendChild(eachGroup);
 
-  group.appendChild(newDiv);
-
-  start();
-
-}
-
-
-//------- TO DO LIST ----------------------
-var i;
-
-function start() {
-
- var btnList = document.getElementsByClassName("btnList");
-
-  for(i = 0; i<btnList.length; i++) {
-  var adds = btnList[i];
-
-  adds.onclick = function(){
-
-    var id = this.id;
-
-    var listText = document.getElementById("inputItem_"+id).value;
-    addNewItem(document.getElementById("ulItem_"+id), listText);
-  }
-}
+  bufferItem();
 
 }
 
-//this function reusable, just choose which id if we have multiple ul
+//--- trigger to call the addNewItem function ------
+function bufferItem() {
+
+   var btnLists = document.getElementsByClassName("btnList");
+
+    for(i = 0; i<btnLists.length; i++) {
+
+        var btnList = btnLists[i];
+
+        btnList.onclick = function() {
+          var id = this.id;
+          var listText = document.getElementById("inputItem-" + id).value;
+          addNewItem(document.getElementById("ulItem-" + id), listText);
+        }
+    }
+}
+
+/*Funtion to add an Item
+  called by bufferItem
+  parameter : 1) ul , 2) listText
+*/
 function addNewItem(list, itemText){
-
-  //var id just to pick a random but not repeated number. We could clearly (BETTER) use global variabel total item that increase each func called
-  var date = new Date();
-  // convert id to string by adding ""
-  var id = "" + date.getHours() +date.getMinutes() + date.getSeconds() + date.getMilliseconds() ;
+  y++;
+  var id = "" + y;
 
   var listItem = document.createElement("li");
-  listItem.id = "li_" + id;
+  listItem.id = "li-" + id;
 
   var checkBox = document.createElement("input");
   checkBox.type = "checkbox";
-  checkBox.id = "cb_" + id;
+  checkBox.id = id;
   checkBox.onclick = updateItemStatus;
 
   var span = document.createElement("span");
-  span.id = "item_" + id;
+  span.id = "item-" + id;
   span.innerText = itemText;
-  //span.onclick = renameItem;
+  span.onclick = renameItem;
   //span.ondblclick = removeItem;
 
   listItem.appendChild(checkBox);
@@ -137,23 +128,27 @@ function addNewItem(list, itemText){
 
 //when checkbox clicked
 function updateItemStatus(){
-  //only take the numbers each checkbox to use for itemlist
-  // because each has the same id
-  var cbId = this.id.replace("cb_", "");
-  var itemText = document.getElementById("item_" + cbId);
+  //this refer to cb
+  var id = this.id;
+  var itemText = document.getElementById("item-" + id);
 
-  //this refer to cb , we can add multiple styling :D
-  if(this.checked)itemText.className = "checked";
-  else itemText.className = "";
+  if(this.checked) {
+    itemText.className = "checked";
+  }
+
+  else {
+    itemText.className = "";
+  }
+
+}
+
+//rename item when clicked on item
+function renameItem() {
+  var newText = prompt(" change list to.. ");
+  this.innerHTML = newText;
 }
 
 
-// // !!! Still problem : doubleclick can't acces because by onclick
-// function renameItem() {
-//    var newText = prompt(" change list to.. ");
-//    this.innerText = newText;
-//  }
-//
 // //doublecliuck span to remove
 // function removeItem() {
 //   var spanId = this.id.replace("item_","");

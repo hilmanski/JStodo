@@ -2,6 +2,12 @@
   display:none;
 }
 
+#Home{
+  color:white;
+  background-color:rgba(0,0,0,0.8);
+  padding:10px;
+}
+
 #Group{
   margin-top:50px;
 }
@@ -14,6 +20,12 @@ ul{
  text-decoration: line-through;
 }
 
-h1.groupName{
+.each-group{
+  float:left;
+  width: 30%;
+  margin-left: 3%;
+}
+
+.each-group h1{
   color:gray;
 }
