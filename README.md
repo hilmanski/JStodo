@@ -6,7 +6,7 @@ Todo List Javascript
 --Pure Javascript ToDo List--
 
 You are able to:
-1)Add Your Name 
+1)Add Your Name <br>
 2)Check/Uncheck the lists
 3)Add list for each group.
 4)Rename the list
