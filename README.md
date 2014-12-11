@@ -1,9 +1,9 @@
 JStodo
 ======
 
-Todo List Javascript
+Pure Multiple Todo List Javascript
 
---Pure Javascript ToDo List--
+--Pure Javascript Multiple ToDo List--
 
 You are able to:<br>
 1)Add Your Name <br>
@@ -11,6 +11,6 @@ You are able to:<br>
 3)Add list for each group.<br>
 4)Rename the list
 
-- Still very rough, on refactor ,Remove item isn't there yet , Styling will come at the end.
+- Still on refactor ,Remove item isn't there yet , Styling will come at the end.
 
 !! It's all front-end, the data won't be saved anywhere, Refresh means destroy All.
