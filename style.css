@@ -1,10 +1,14 @@
+*{
+  font-family:Arial, Helvetica, sans-serif;
+}
+
 #Home, #Group{
   display:none;
 }
 
 #Home{
   color:white;
-  background-color:rgba(0,0,0,0.8);
+  background-color:#3A97DF;
   padding:10px;
 }
 
@@ -27,5 +31,5 @@ ul{
 }
 
 .each-group h1{
-  color:gray;
+  color:#3A97DF;
 }

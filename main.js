@@ -1,6 +1,5 @@
 /*
 * Developed by : Hilman Ramadhan
-* idea based   : Easy learn tutorial
 */
 
 var btnStart = document.getElementById("btnStart");
@@ -60,7 +59,7 @@ function addGroup() {
 
 
 /* Function add a group :
-   Called by btnAddGroup
+   Called by addGroup
    parameter :  1)Div id, 2)GroupName
 */
 
@@ -74,6 +73,7 @@ function addNewGroup(group, groupText){
 
   var inputItem = document.createElement("input");
   inputItem.type = "text";
+  inputItem.className = "inputItemList";
   inputItem.id = "inputItem-" +id;
 
   var btnItem = document.createElement("BUTTON");
@@ -94,54 +94,70 @@ function addNewGroup(group, groupText){
   eachGroup.appendChild(btnItem);
   eachGroup.appendChild(ulItem);
 
-  group.appendChild(eachGroup);
+  document.getElementById("Group").appendChild(eachGroup);
 
-  bufferItem();
+  addNewItem();
 }
 
-//--- trigger to call the addNewItem function ------
-function bufferItem() {
+
+function addNewItem() {
     var btnLists = document.getElementsByClassName("btnList");
+    var inputItemLists = document.getElementsByClassName("inputItemList");
 
     for(i = 0; i<btnLists.length; i++) {
 
         var btnList = btnLists[i];
+        var item = inputItemLists[i]
 
+        //submitted by button clicked
         btnList.onclick = function() {
           var id = this.id;
 
           var listText = document.getElementById("inputItem-" + id).value;
-          addNewItem(document.getElementById("ulItem-" + id), listText);
+          addItem(document.getElementById("ulItem-" + id), listText);
         }
+
+        //submitted by keyboard enter
+        item.onkeypress =function (event){
+
+          if(event.keyCode == 13){
+
+            var id = this.id;
+            id = id.replace("inputItem-", "");
+
+            var listText = document.getElementById("inputItem-" + id).value;
+            addItem(document.getElementById("ulItem-" + id), listText);
+        }
+      }
+
     }
-}
 
-/*Funtion to add an Item
-  called by bufferItem
-  parameter : 1) ul , 2) listText
-*/
-function addNewItem(list, itemText){
-  y++;
-  var id = "" + y;
 
-  var listItem = document.createElement("li");
-  listItem.id = "li-" + id;
+    //parameter : 1) ul , 2) listText
+    function addItem(list, itemText){
+      y++;
+      var id = "" + y;
 
-  var checkBox = document.createElement("input");
-  checkBox.type = "checkbox";
-  checkBox.id = id;
-  checkBox.onclick = updateItemStatus;
+      var listItem = document.createElement("li");
+      listItem.id = "li-" + id;
 
-  var span = document.createElement("span");
-  span.id = "item-" + id;
-  span.innerText = itemText;
-  span.onclick = renameItem;
-  //span.ondblclick = removeItem;
+      var checkBox = document.createElement("input");
+      checkBox.type = "checkbox";
+      checkBox.id = id;
+      checkBox.onclick = updateItemStatus;
 
-  listItem.appendChild(checkBox);
-  listItem.appendChild(span);
+      var span = document.createElement("span");
+      span.id = "item-" + id;
+      span.innerText = itemText;
+      span.onclick = renameItem;
+      //span.ondblclick = removeItem;
 
-  list.appendChild(listItem);
+      listItem.appendChild(checkBox);
+      listItem.appendChild(span);
+
+      list.appendChild(listItem);
+
+    }
 
 }
 
@@ -165,7 +181,14 @@ function updateItemStatus(){
 //rename item when clicked on item
 function renameItem() {
   var newText = prompt(" change list to.. ");
-  this.innerHTML = newText;
+
+  if(newText === "" || newText.match(/^\s*$/) ){
+
+  } else if (newText) {
+    this.innerHTML = newText;
+  }else{
+
+  }
 }
 
 
